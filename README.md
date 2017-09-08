@@ -12,3 +12,40 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+# How to run this project
+
+## Prerequisites
+
+To complete this tutorial:
+
+* Install [Visual Studio 2017](https://www.visualstudio.com/en-us/visual-studio-homepage-vs.aspx) with the following workload:
+    - **Azure development**
+
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+
+## Create a storage account using the Azure portal
+
+First, create a new general-purpose storage account to use for this tutorial. 
+
+*  Go to the [Azure portal](https://portal.azure.com) and log in using your Azure account. 
+*  On the Hub menu, select **New** > **Storage** > **Storage account - blob, file, table, queue**. 
+*  Enter a name for your storage account. The name must be between 3 and 24 characters in length and may contain numbers and lowercase letters only. It must also be unique.
+*  Set `Deployment model` to **Resource manager**.
+*  Set `Account kind` to **General purpose**.
+*  Set `Performance` to **Standard**. 
+*  Set `Replication` to **Locally Redundant storage (LRS)**.
+*  Set `Storage service encryption` to **Disabled**.
+*  Set `Secure transfer required` to **Disabled**.
+*  Select your subscirption. 
+*  For `resource group`, create a new one and give it a unique name. 
+*  Select the `Location` to use for your storage account.
+*  Check **Pin to dashboard** and click **Create** to create your storage account. 
+
+After your storage account is created, it is pinned to the dashboard. Click on it to open it. Under SETTINGS, click **Access keys**. Select a key and copy the CONNECTION STRING to the clipboard, then paste it into Notepad for later use.
+
+## Put the connection string in the app.config. 
+
+Open this solution, and in the app.config file, change the value for connection string to the one retrieved from the portal. 
+
+At this point, you can run this application. It creates its own file to upload and download, and then cleans up after itself by deleting everything at the end. 
