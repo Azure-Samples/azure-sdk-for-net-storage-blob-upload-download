@@ -19,8 +19,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 To complete this tutorial:
 
-* Install [Visual Studio 2017](https://www.visualstudio.com/en-us/visual-studio-homepage-vs.aspx) with the following workload:
-    - **Azure development**
+* Install .NET core 2.0 for [Linux](/dotnet/core/linux-prerequisites?tabs=netcore2x) or [Windows](/dotnet/core/windows-prerequisites?tabs=netcore2x)
 
 If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
 
