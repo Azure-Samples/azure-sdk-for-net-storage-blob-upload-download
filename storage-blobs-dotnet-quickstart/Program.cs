@@ -81,8 +81,8 @@ namespace storage_blobs_dotnet_quickstart
         private static async Task ProcessAsync()
         {
             CloudBlobContainer cloudBlobContainer = null;
-            string fileAndPath = null;
-            string fileAndPath2 = null;
+            string sourceFile = null;
+            string destinationFile = null;
 
             try
             {
@@ -108,17 +108,17 @@ namespace storage_blobs_dotnet_quickstart
                 // Create a file in MyDocuments to test the upload and download.
                 string localPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 string localFileName = "QuickStart_" + Guid.NewGuid().ToString() + ".txt";
-                fileAndPath = Path.Combine(localPath, localFileName);
+                sourceFile = Path.Combine(localPath, localFileName);
                 // Write text to the file.
-                File.WriteAllText(fileAndPath, "Hello, World!");
+                File.WriteAllText(sourceFile, "Hello, World!");
 
-                Console.WriteLine("Temp file = {0}", fileAndPath);
+                Console.WriteLine("Temp file = {0}", sourceFile);
                 Console.WriteLine("Uploading to Blob storage as blob '{0}'", localFileName);
 
                 // Get a reference to the location where the blob is going to go, then upload the file.
                 // Upload the file you created, use localFileName for the blob name.
                 CloudBlockBlob cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(localFileName);
-                await cloudBlockBlob.UploadFromFileAsync(fileAndPath);
+                await cloudBlockBlob.UploadFromFileAsync(sourceFile);
 
 
                 // List the blobs in the container.
@@ -137,9 +137,9 @@ namespace storage_blobs_dotnet_quickstart
                 //   to cloudBlockBlob here. However, we created that reference earlier, and 
                 //   haven't changed the blob we're interested in, so we can reuse it. 
                 // First, add a _DOWNLOADED before the .txt so you can see both files in MyDocuments.
-                fileAndPath2 = fileAndPath.Replace(".txt", "_DOWNLOADED.txt");
-                Console.WriteLine("Downloading blob to {0}", fileAndPath2);
-                await cloudBlockBlob.DownloadToFileAsync(fileAndPath2, FileMode.Create);
+                destinationFile = sourceFile.Replace(".txt", "_DOWNLOADED.txt");
+                Console.WriteLine("Downloading blob to {0}", destinationFile);
+                await cloudBlockBlob.DownloadToFileAsync(destinationFile, FileMode.Create);
 
 
             }
@@ -170,14 +170,14 @@ namespace storage_blobs_dotnet_quickstart
                     Console.WriteLine("Error returned from the service: {0}", ex.Message);
                 }
                 Console.WriteLine("Deleting the source, and downloaded files");
-                if (File.Exists(fileAndPath))
+                if (File.Exists(sourceFile))
                 {
-                    File.Delete(fileAndPath);
+                    File.Delete(sourceFile);
                 }
 
-                if (File.Exists(fileAndPath2))
+                if (File.Exists(destinationFile))
                 {
-                    File.Delete(fileAndPath2);
+                    File.Delete(destinationFile);
                 }
             }
         }
