@@ -90,7 +90,7 @@ namespace storage_blobs_dotnet_quickstart
                 // in an environment variable on the machine running the application called storageconnectionstring.
                 // If the environment variable is created after the application is launched in a console or with Visual
                 // studio the shell needs to be closed and reloaded to take the environment variable into account.
-                string storage_connection_string = Environment.GetEnvironmentVariable("storageconnectionstring", EnvironmentVariableTarget.Machine);
+                string storage_connection_string = Environment.GetEnvironmentVariable("storageconnectionstring");
                 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(storage_connection_string);
 
 
