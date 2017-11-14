@@ -51,7 +51,7 @@ This solution requires a connection string be stored in an environment variable 
 ### Linux
 
 ```bash
-export storageconnectionstring=<yourconnectionstring>
+export storageconnectionstring="<yourconnectionstring>"
 ```
 ### Windows
 

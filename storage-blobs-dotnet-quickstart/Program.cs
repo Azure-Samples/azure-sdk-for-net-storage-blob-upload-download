@@ -89,16 +89,15 @@ namespace storage_blobs_dotnet_quickstart
                 // Load the connection string for use with the application. The storage connection string is stored
                 // in an environment variable on the machine running the application called storageconnectionstring.
                 // If the environment variable is created after the application is launched in a console or with Visual
-                // studio the shell needs to be closed and reloaded to take the environment variable into account.
+                // Studio, the shell needs to be closed and reloaded to take the environment variable into account.
                 string storage_connection_string = Environment.GetEnvironmentVariable("storageconnectionstring");
                 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(storage_connection_string);
-
 
                 // Create the CloudBlobClient that is used to call the Blob Service for that storage account.
                 CloudBlobClient cloudBlobClient = storageAccount.CreateCloudBlobClient();
 
                 // Create a container called 'quickstartblobs'. 
-                cloudBlobContainer = cloudBlobClient.GetContainerReference("quickstartblobs");
+                cloudBlobContainer = cloudBlobClient.GetContainerReference("quickstartblobs" + Guid.NewGuid().ToString());
                 await cloudBlobContainer.CreateIfNotExistsAsync();
 
                 // Set the permissions so the blobs are public. 
@@ -146,7 +145,7 @@ namespace storage_blobs_dotnet_quickstart
             }
             catch (StorageException ex)
             {
-               Console.WriteLine("Error returned from the service: {0}", ex.Message);
+                Console.WriteLine("Error returned from the service: {0}", ex.Message);
             }
             catch (Exception ex)
             {
@@ -160,10 +159,10 @@ namespace storage_blobs_dotnet_quickstart
                 // Clean up resources. This includes the container and the two temp files.
                 Console.WriteLine("Deleting the container");
                 try
-                { 
-                    if(cloudBlobContainer != null)
-                    { 
-                    await cloudBlobContainer.DeleteAsync();
+                {
+                    if (cloudBlobContainer != null)
+                    {
+                        await cloudBlobContainer.DeleteAsync();
                     }
                 }
                 catch (StorageException ex)
@@ -171,14 +170,14 @@ namespace storage_blobs_dotnet_quickstart
                     Console.WriteLine("Error returned from the service: {0}", ex.Message);
                 }
                 Console.WriteLine("Deleting the source, and downloaded files");
-                if(File.Exists(fileAndPath))
-                    {
+                if (File.Exists(fileAndPath))
+                {
                     File.Delete(fileAndPath);
                 }
 
-                if(File.Exists(fileAndPath2))
-                { 
-                File.Delete(fileAndPath2);
+                if (File.Exists(fileAndPath2))
+                {
+                    File.Delete(fileAndPath2);
                 }
             }
         }
