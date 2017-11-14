@@ -44,8 +44,24 @@ First, create a new general-purpose storage account to use for this tutorial.
 
 After your storage account is created, it is pinned to the dashboard. Click on it to open it. Under SETTINGS, click **Access keys**. Select a key and copy the CONNECTION STRING to the clipboard, then paste it into Notepad for later use.
 
-## Put the connection string in the app.config. 
+## Put the connection string in an environment variable
 
-Open this solution, and in the app.config file, change the value for connection string to the one retrieved from the portal. 
+This solution requires a connection string be stored in an environment variable securely on the machine running the sample. Follow one of the examples below depending on your Operating System to create the environment variable. If using windows close out of your open IDE or shell and restart it to be able to read the environment variable.
 
-At this point, you can run this application. It creates its own file to upload and download, and then cleans up after itself by deleting everything at the end. 
+```bash
+export storageconnectionstring=<yourconnectionstring>
+```
+
+```cmd
+setx storageconnectionstring "<yourconnectionstring>"
+```
+
+At this point, you can run this application. It creates its own file to upload and download, and then cleans up after itself by deleting everything at the end.
+
+## Run the application
+
+Navigate to your application directory and run the application with the `dotnet run` command.
+
+```
+dotnet run
+```
