@@ -50,32 +50,12 @@ namespace storage_blobs_dotnet_quickstart
     /// - Asynchronous Programming with Async and Await  - http://msdn.microsoft.com/library/hh191443.aspx
     /// </summary>
 
-    public class Program
+    public static class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
             Console.WriteLine("Azure Blob storage quick start sample");
-            try
-            {
-                ProcessAsync().Wait();
-            }
-
-            catch (AggregateException ae)
-            {
-                ae.Handle((x) =>
-                {
-                    if (x is ArgumentNullException) // This we know how to handle.
-                    {
-                        Console.WriteLine("A connection string has not been defined in the system environment variables. Add a environment variable name 'storageconnectionstring' with the actual storage connection string as a value.");
-                    }
-                    else
-                    {
-                        Console.WriteLine(x.Message);
-                    }
-
-                    return true;
-                });
-            }
+            ProcessAsync().GetAwaiter().GetResult();
         }
 
         private static async Task ProcessAsync()
@@ -90,8 +70,15 @@ namespace storage_blobs_dotnet_quickstart
                 // in an environment variable on the machine running the application called storageconnectionstring.
                 // If the environment variable is created after the application is launched in a console or with Visual
                 // Studio, the shell needs to be closed and reloaded to take the environment variable into account.
-                string storage_connection_string = Environment.GetEnvironmentVariable("storageconnectionstring");
-                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(storage_connection_string);
+                string storageConnectionString = Environment.GetEnvironmentVariable("storageconnectionstring");
+                if (storageConnectionString == null)
+                {
+                    Console.WriteLine(
+                        "A connection string has not been defined in the system environment variables. " +
+                        "Add a environment variable name 'storageconnectionstring' with the actual storage " +
+                        "connection string as a value.");
+                }
+                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(storageConnectionString);
 
                 // Create the CloudBlobClient that is used to call the Blob Service for that storage account.
                 CloudBlobClient cloudBlobClient = storageAccount.CreateCloudBlobClient();
@@ -101,8 +88,10 @@ namespace storage_blobs_dotnet_quickstart
                 await cloudBlobContainer.CreateIfNotExistsAsync();
 
                 // Set the permissions so the blobs are public. 
-                BlobContainerPermissions permissions = new BlobContainerPermissions();
-                permissions.PublicAccess = BlobContainerPublicAccessType.Blob;
+                BlobContainerPermissions permissions = new BlobContainerPermissions
+                {
+                    PublicAccess = BlobContainerPublicAccessType.Blob
+                };
                 await cloudBlobContainer.SetPermissionsAsync(permissions);
 
                 // Create a file in MyDocuments to test the upload and download.
@@ -127,6 +116,7 @@ namespace storage_blobs_dotnet_quickstart
                 do
                 {
                     var results = await cloudBlobContainer.ListBlobsSegmentedAsync(null, blobContinuationToken);
+                    blobContinuationToken = results.ContinuationToken;
                     foreach (IListBlobItem item in results.Results)
                     {
                         Console.WriteLine(item.Uri);
@@ -140,47 +130,25 @@ namespace storage_blobs_dotnet_quickstart
                 destinationFile = sourceFile.Replace(".txt", "_DOWNLOADED.txt");
                 Console.WriteLine("Downloading blob to {0}", destinationFile);
                 await cloudBlockBlob.DownloadToFileAsync(destinationFile, FileMode.Create);
-
-
             }
             catch (StorageException ex)
             {
                 Console.WriteLine("Error returned from the service: {0}", ex.Message);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception thrown = {0}", ex.Message);
-            }
             finally
             {
-                Console.WriteLine("The program has completed successfully.");
-                Console.WriteLine("Press the 'Enter' key while in the console to delete the sample files, example container, and exit the application.");
+                Console.WriteLine("Press the 'Enter' key to delete the sample files, example container, and exit the application.");
                 Console.ReadLine();
                 // Clean up resources. This includes the container and the two temp files.
                 Console.WriteLine("Deleting the container");
-                try
+                if (cloudBlobContainer != null)
                 {
-                    if (cloudBlobContainer != null)
-                    {
-                        await cloudBlobContainer.DeleteAsync();
-                    }
-                }
-                catch (StorageException ex)
-                {
-                    Console.WriteLine("Error returned from the service: {0}", ex.Message);
+                    await cloudBlobContainer.DeleteIfExistsAsync();
                 }
                 Console.WriteLine("Deleting the source, and downloaded files");
-                if (File.Exists(sourceFile))
-                {
-                    File.Delete(sourceFile);
-                }
-
-                if (File.Exists(destinationFile))
-                {
-                    File.Delete(destinationFile);
-                }
+                File.Delete(sourceFile);
+                File.Delete(destinationFile);
             }
         }
-
     }
 }
