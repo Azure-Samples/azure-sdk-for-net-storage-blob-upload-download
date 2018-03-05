@@ -39,22 +39,15 @@ namespace storage_blobs_dotnet_quickstart
     /// responsiveness of your application. Calls to Blob storage are prefixed by the await keyword. 
     /// 
     /// Documentation References: 
-    /// - What is a Storage Account - https://docs.microsoft.com/azure/storage/common/storage-create-storage-account
-    /// - Getting Started with Blobs - https://docs.microsoft.com/azure/storage/blobs/storage-dotnet-how-to-use-blobs
-    /// - Blob Service Concepts - https://docs.microsoft.com/rest/api/storageservices/Blob-Service-Concepts
-    /// - Blob Service REST API - https://docs.microsoft.com/rest/api/storageservices/Blob-Service-REST-API
-    /// - Blob Service C# API - https://docs.microsoft.com/dotnet/api/overview/azure/storage?view=azure-dotnet
-    /// - Scalability and performance targets - https://docs.microsoft.com/azure/storage/common/storage-scalability-targets
-    ///   Azure Storage Performance and Scalability checklist https://docs.microsoft.com/azure/storage/common/storage-performance-checklist
-    /// - Storage Emulator - https://docs.microsoft.com/azure/storage/common/storage-use-emulator
-    /// - Asynchronous Programming with Async and Await  - http://msdn.microsoft.com/library/hh191443.aspx
+    /// - Azure Storage client library for .NET - https://docs.microsoft.com/dotnet/api/overview/azure/storage?view=azure-dotnet
+    /// - Asynchronous Programming with Async and Await - http://msdn.microsoft.com/library/hh191443.aspx
     /// </summary>
 
     public static class Program
     {
         public static void Main()
         {
-            Console.WriteLine("Azure Blob storage quick start sample");
+            Console.WriteLine("Azure Blob storage - .NET Quickstart sample");
             ProcessAsync().GetAwaiter().GetResult();
         }
 
