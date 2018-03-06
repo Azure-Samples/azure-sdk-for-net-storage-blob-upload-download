@@ -48,7 +48,11 @@ namespace storage_blobs_dotnet_quickstart
         public static void Main()
         {
             Console.WriteLine("Azure Blob storage - .NET Quickstart sample");
+            Console.WriteLine();
             ProcessAsync().GetAwaiter().GetResult();
+
+            Console.WriteLine("Press any key to exit the sample application.");
+            Console.ReadLine();
         }
 
         private static async Task ProcessAsync()
@@ -75,6 +79,8 @@ namespace storage_blobs_dotnet_quickstart
                     // Create a container called 'quickstartblobs' and append a GUID value to it to make the name unique. 
                     cloudBlobContainer = cloudBlobClient.GetContainerReference("quickstartblobs" + Guid.NewGuid().ToString());
                     await cloudBlobContainer.CreateAsync();
+                    Console.WriteLine("Created container '{0}'", cloudBlobContainer.Name);
+                    Console.WriteLine();
 
                     // Set the permissions so the blobs are public. 
                     BlobContainerPermissions permissions = new BlobContainerPermissions
@@ -92,6 +98,7 @@ namespace storage_blobs_dotnet_quickstart
 
                     Console.WriteLine("Temp file = {0}", sourceFile);
                     Console.WriteLine("Uploading to Blob storage as blob '{0}'", localFileName);
+                    Console.WriteLine();
 
                     // Get a reference to the blob address, then upload the file to the blob.
                     // Use the value of localFileName for the blob name.
@@ -99,7 +106,7 @@ namespace storage_blobs_dotnet_quickstart
                     await cloudBlockBlob.UploadFromFileAsync(sourceFile);
 
                     // List the blobs in the container.
-                    Console.WriteLine("List blobs in container.");
+                    Console.WriteLine("Listing blobs in container.");
                     BlobContinuationToken blobContinuationToken = null;
                     do
                     {
@@ -111,11 +118,13 @@ namespace storage_blobs_dotnet_quickstart
                             Console.WriteLine(item.Uri);
                         }
                     } while (blobContinuationToken != null); // Loop while the continuation token is not null.
+                    Console.WriteLine();
 
                     // Download the blob to a local file, using the reference created earlier. 
                     // Append the string "_DOWNLOADED" before the .txt extension so that you can see both files in MyDocuments.
                     destinationFile = sourceFile.Replace(".txt", "_DOWNLOADED.txt");
                     Console.WriteLine("Downloading blob to {0}", destinationFile);
+                    Console.WriteLine();
                     await cloudBlockBlob.DownloadToFileAsync(destinationFile, FileMode.Create);
                 }
                 catch (StorageException ex)
@@ -127,12 +136,13 @@ namespace storage_blobs_dotnet_quickstart
                     Console.WriteLine("Press the 'Enter' key to delete the sample files, example container, and exit the application.");
                     Console.ReadLine();
                     // Clean up resources. This includes the container and the two temp files.
-                    Console.WriteLine("Deleting the container");
+                    Console.WriteLine("Deleting the container and any blobs it contains");
                     if (cloudBlobContainer != null)
                     {
                         await cloudBlobContainer.DeleteIfExistsAsync();
                     }
-                    Console.WriteLine("Deleting the source, and downloaded files");
+                    Console.WriteLine("Deleting the local source file and local downloaded files");
+                    Console.WriteLine();
                     File.Delete(sourceFile);
                     File.Delete(destinationFile);
                 }
@@ -143,8 +153,6 @@ namespace storage_blobs_dotnet_quickstart
                     "A connection string has not been defined in the system environment variables. " +
                     "Add a environment variable named 'storageconnectionstring' with your storage " +
                     "connection string as a value.");
-                Console.WriteLine("Press any key to exit the sample application.");
-                Console.ReadLine();
             }
         }
     }
