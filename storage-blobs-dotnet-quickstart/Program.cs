@@ -133,7 +133,7 @@ namespace storage_blobs_dotnet_quickstart
                 }
                 finally
                 {
-                    Console.WriteLine("Press the 'Enter' key to delete the sample files, example container, and exit the application.");
+                    Console.WriteLine("Press any key to delete the sample files and example container.");
                     Console.ReadLine();
                     // Clean up resources. This includes the container and the two temp files.
                     Console.WriteLine("Deleting the container and any blobs it contains");
