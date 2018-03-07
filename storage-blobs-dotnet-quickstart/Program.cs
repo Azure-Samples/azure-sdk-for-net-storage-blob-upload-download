@@ -34,120 +34,125 @@ namespace storage_blobs_dotnet_quickstart
     /// <summary>
     /// Azure Storage Quickstart Sample - Demonstrate how to upload, list, download, and delete blobs. 
     ///
-    /// Note: This sample uses the .NET asynchronous programming model to demonstrate how to call the Storage Service using the 
-    /// storage client libraries asynchronous API's. When used in real applications this approach enables you to improve the 
-    /// responsiveness of your application. Calls to the storage service are prefixed by the await keyword. 
+    /// Note: This sample uses the .NET asynchronous programming model to demonstrate how to call Blob storage using the 
+    /// storage client library's asynchronous API's. When used in production applications, this approach enables you to improve the 
+    /// responsiveness of your application. Calls to Blob storage are prefixed by the await keyword. 
     /// 
     /// Documentation References: 
-    /// - What is a Storage Account - https://docs.microsoft.com/azure/storage/common/storage-create-storage-account
-    /// - Getting Started with Blobs - https://docs.microsoft.com/azure/storage/blobs/storage-dotnet-how-to-use-blobs
-    /// - Blob Service Concepts - https://docs.microsoft.com/rest/api/storageservices/Blob-Service-Concepts
-    /// - Blob Service REST API - https://docs.microsoft.com/rest/api/storageservices/Blob-Service-REST-API
-    /// - Blob Service C# API - https://docs.microsoft.com/dotnet/api/overview/azure/storage?view=azure-dotnet
-    /// - Scalability and performance targets - https://docs.microsoft.com/azure/storage/common/storage-scalability-targets
-    ///   Azure Storage Performance and Scalability checklist https://docs.microsoft.com/azure/storage/common/storage-performance-checklist
-    /// - Storage Emulator - https://docs.microsoft.com/azure/storage/common/storage-use-emulator
-    /// - Asynchronous Programming with Async and Await  - http://msdn.microsoft.com/library/hh191443.aspx
+    /// - Azure Storage client library for .NET - https://docs.microsoft.com/dotnet/api/overview/azure/storage?view=azure-dotnet
+    /// - Asynchronous Programming with Async and Await - http://msdn.microsoft.com/library/hh191443.aspx
     /// </summary>
 
     public static class Program
     {
         public static void Main()
         {
-            Console.WriteLine("Azure Blob storage quick start sample");
+            Console.WriteLine("Azure Blob storage - .NET Quickstart sample");
+            Console.WriteLine();
             ProcessAsync().GetAwaiter().GetResult();
+
+            Console.WriteLine("Press any key to exit the sample application.");
+            Console.ReadLine();
         }
 
         private static async Task ProcessAsync()
         {
+            CloudStorageAccount storageAccount = null;
             CloudBlobContainer cloudBlobContainer = null;
             string sourceFile = null;
             string destinationFile = null;
 
-            try
+            // Retrieve the connection string for use with the application. The storage connection string is stored
+            // in an environment variable on the machine running the application called storageconnectionstring.
+            // If the environment variable is created after the application is launched in a console or with Visual
+            // Studio, the shell needs to be closed and reloaded to take the environment variable into account.
+            string storageConnectionString = Environment.GetEnvironmentVariable("storageconnectionstring", EnvironmentVariableTarget.User);
+
+            // Check whether the connection string can be parsed.
+            if (CloudStorageAccount.TryParse(storageConnectionString, out storageAccount))
             {
-                // Load the connection string for use with the application. The storage connection string is stored
-                // in an environment variable on the machine running the application called storageconnectionstring.
-                // If the environment variable is created after the application is launched in a console or with Visual
-                // Studio, the shell needs to be closed and reloaded to take the environment variable into account.
-                string storageConnectionString = Environment.GetEnvironmentVariable("storageconnectionstring");
-                if (storageConnectionString == null)
+                try
                 {
-                    Console.WriteLine(
-                        "A connection string has not been defined in the system environment variables. " +
-                        "Add a environment variable name 'storageconnectionstring' with the actual storage " +
-                        "connection string as a value.");
-                }
-                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(storageConnectionString);
+                    // Create the CloudBlobClient that represents the Blob storage endpoint for the storage account.
+                    CloudBlobClient cloudBlobClient = storageAccount.CreateCloudBlobClient();
 
-                // Create the CloudBlobClient that is used to call the Blob Service for that storage account.
-                CloudBlobClient cloudBlobClient = storageAccount.CreateCloudBlobClient();
+                    // Create a container called 'quickstartblobs' and append a GUID value to it to make the name unique. 
+                    cloudBlobContainer = cloudBlobClient.GetContainerReference("quickstartblobs" + Guid.NewGuid().ToString());
+                    await cloudBlobContainer.CreateAsync();
+                    Console.WriteLine("Created container '{0}'", cloudBlobContainer.Name);
+                    Console.WriteLine();
 
-                // Create a container called 'quickstartblobs'. 
-                cloudBlobContainer = cloudBlobClient.GetContainerReference("quickstartblobs" + Guid.NewGuid().ToString());
-                await cloudBlobContainer.CreateIfNotExistsAsync();
-
-                // Set the permissions so the blobs are public. 
-                BlobContainerPermissions permissions = new BlobContainerPermissions
-                {
-                    PublicAccess = BlobContainerPublicAccessType.Blob
-                };
-                await cloudBlobContainer.SetPermissionsAsync(permissions);
-
-                // Create a file in MyDocuments to test the upload and download.
-                string localPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string localFileName = "QuickStart_" + Guid.NewGuid().ToString() + ".txt";
-                sourceFile = Path.Combine(localPath, localFileName);
-                // Write text to the file.
-                File.WriteAllText(sourceFile, "Hello, World!");
-
-                Console.WriteLine("Temp file = {0}", sourceFile);
-                Console.WriteLine("Uploading to Blob storage as blob '{0}'", localFileName);
-
-                // Get a reference to the location where the blob is going to go, then upload the file.
-                // Upload the file you created, use localFileName for the blob name.
-                CloudBlockBlob cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(localFileName);
-                await cloudBlockBlob.UploadFromFileAsync(sourceFile);
-
-
-                // List the blobs in the container.
-                Console.WriteLine("List blobs in container.");
-                BlobContinuationToken blobContinuationToken = null;
-                do
-                {
-                    var results = await cloudBlobContainer.ListBlobsSegmentedAsync(null, blobContinuationToken);
-                    blobContinuationToken = results.ContinuationToken;
-                    foreach (IListBlobItem item in results.Results)
+                    // Set the permissions so the blobs are public. 
+                    BlobContainerPermissions permissions = new BlobContainerPermissions
                     {
-                        Console.WriteLine(item.Uri);
-                    }
-                } while (blobContinuationToken != null);
+                        PublicAccess = BlobContainerPublicAccessType.Blob
+                    };
+                    await cloudBlobContainer.SetPermissionsAsync(permissions);
 
-                // Download blob. In most cases, you would have to retrieve the reference
-                //   to cloudBlockBlob here. However, we created that reference earlier, and 
-                //   haven't changed the blob we're interested in, so we can reuse it. 
-                // First, add a _DOWNLOADED before the .txt so you can see both files in MyDocuments.
-                destinationFile = sourceFile.Replace(".txt", "_DOWNLOADED.txt");
-                Console.WriteLine("Downloading blob to {0}", destinationFile);
-                await cloudBlockBlob.DownloadToFileAsync(destinationFile, FileMode.Create);
-            }
-            catch (StorageException ex)
-            {
-                Console.WriteLine("Error returned from the service: {0}", ex.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Press the 'Enter' key to delete the sample files, example container, and exit the application.");
-                Console.ReadLine();
-                // Clean up resources. This includes the container and the two temp files.
-                Console.WriteLine("Deleting the container");
-                if (cloudBlobContainer != null)
-                {
-                    await cloudBlobContainer.DeleteIfExistsAsync();
+                    // Create a file in your local MyDocuments folder to upload to a blob.
+                    string localPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    string localFileName = "QuickStart_" + Guid.NewGuid().ToString() + ".txt";
+                    sourceFile = Path.Combine(localPath, localFileName);
+                    // Write text to the file.
+                    File.WriteAllText(sourceFile, "Hello, World!");
+
+                    Console.WriteLine("Temp file = {0}", sourceFile);
+                    Console.WriteLine("Uploading to Blob storage as blob '{0}'", localFileName);
+                    Console.WriteLine();
+
+                    // Get a reference to the blob address, then upload the file to the blob.
+                    // Use the value of localFileName for the blob name.
+                    CloudBlockBlob cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(localFileName);
+                    await cloudBlockBlob.UploadFromFileAsync(sourceFile);
+
+                    // List the blobs in the container.
+                    Console.WriteLine("Listing blobs in container.");
+                    BlobContinuationToken blobContinuationToken = null;
+                    do
+                    {
+                        var results = await cloudBlobContainer.ListBlobsSegmentedAsync(null, blobContinuationToken);
+                        // Get the value of the continuation token returned by the listing call.
+                        blobContinuationToken = results.ContinuationToken;
+                        foreach (IListBlobItem item in results.Results)
+                        {
+                            Console.WriteLine(item.Uri);
+                        }
+                    } while (blobContinuationToken != null); // Loop while the continuation token is not null.
+                    Console.WriteLine();
+
+                    // Download the blob to a local file, using the reference created earlier. 
+                    // Append the string "_DOWNLOADED" before the .txt extension so that you can see both files in MyDocuments.
+                    destinationFile = sourceFile.Replace(".txt", "_DOWNLOADED.txt");
+                    Console.WriteLine("Downloading blob to {0}", destinationFile);
+                    Console.WriteLine();
+                    await cloudBlockBlob.DownloadToFileAsync(destinationFile, FileMode.Create);
                 }
-                Console.WriteLine("Deleting the source, and downloaded files");
-                File.Delete(sourceFile);
-                File.Delete(destinationFile);
+                catch (StorageException ex)
+                {
+                    Console.WriteLine("Error returned from the service: {0}", ex.Message);
+                }
+                finally
+                {
+                    Console.WriteLine("Press any key to delete the sample files and example container.");
+                    Console.ReadLine();
+                    // Clean up resources. This includes the container and the two temp files.
+                    Console.WriteLine("Deleting the container and any blobs it contains");
+                    if (cloudBlobContainer != null)
+                    {
+                        await cloudBlobContainer.DeleteIfExistsAsync();
+                    }
+                    Console.WriteLine("Deleting the local source file and local downloaded files");
+                    Console.WriteLine();
+                    File.Delete(sourceFile);
+                    File.Delete(destinationFile);
+                }
+            }
+            else
+            {
+                Console.WriteLine(
+                    "A connection string has not been defined in the system environment variables. " +
+                    "Add a environment variable named 'storageconnectionstring' with your storage " +
+                    "connection string as a value.");
             }
         }
     }
