@@ -45,18 +45,11 @@ namespace storage_blobs_dotnet_quickstart
 
     public static class Program
     {
-        public static void Main()
+        public static async Task Main()
         {
             Console.WriteLine("Azure Blob storage - .NET Quickstart sample");
             Console.WriteLine();
-            ProcessAsync().GetAwaiter().GetResult();
-
-            Console.WriteLine("Press any key to exit the sample application.");
-            Console.ReadLine();
-        }
-
-        private static async Task ProcessAsync()
-        {
+            
             CloudStorageAccount storageAccount = null;
             CloudBlobContainer cloudBlobContainer = null;
             string sourceFile = null;
@@ -154,6 +147,9 @@ namespace storage_blobs_dotnet_quickstart
                     "Add a environment variable named 'storageconnectionstring' with your storage " +
                     "connection string as a value.");
             }
+
+            Console.WriteLine("Press any key to exit the sample application.");
+            Console.ReadLine();
         }
     }
 }
