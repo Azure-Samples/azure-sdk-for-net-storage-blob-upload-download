@@ -54,7 +54,7 @@ namespace storage_blobs_dotnet_quickstart
             CloudStorageAccount storageAccount = null;
             CloudBlobContainer cloudBlobContainer = null;
             string sourceFile = null;
-            string destinationFile = null;        
+            string destinationFile = null;
 
             // Retrieve the connection string for use with the application. The storage connection string is stored
             // in an environment variable on the machine running the application called storageconnectionstring.
