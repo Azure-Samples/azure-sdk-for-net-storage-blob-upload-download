@@ -55,19 +55,20 @@ namespace storage_blobs_dotnet_quickstart
             CloudBlobContainer cloudBlobContainer = null;
             string sourceFile = null;
             string destinationFile = null;
+            string envVariable = "storageconnectionstring";
 
             // Retrieve the connection string for use with the application. The storage connection string is stored
             // in an environment variable on the machine running the application called storageconnectionstring.
             // If the environment variable is created after the application is launched in a console or with Visual
             // Studio, the shell needs to be closed and reloaded to take the environment variable into account.
-            string storageConnectionString = Environment.GetEnvironmentVariable("storageconnectionstring");
+            string storageConnectionString = Environment.GetEnvironmentVariable(envVariable);
 
             // Check whether the connection string can be parsed.
             if (!CloudStorageAccount.TryParse(storageConnectionString, out storageAccount))
             {
                 WriteLine(
                     "A connection string has not been defined in the system environment variables. " +
-                    "Add a environment variable named 'storageconnectionstring' with your storage " +
+                    $"Add a environment variable named '{envVariable}' with your storage " +
                     "connection string as a value.");
                 return;
             }
@@ -78,9 +79,9 @@ namespace storage_blobs_dotnet_quickstart
                 CloudBlobClient cloudBlobClient = storageAccount.CreateCloudBlobClient();
 
                 // Create a container called 'quickstartblobs' and append a GUID value to it to make the name unique. 
-                cloudBlobContainer = cloudBlobClient.GetContainerReference("quickstartblobs" + Guid.NewGuid().ToString());
+                cloudBlobContainer = cloudBlobClient.GetContainerReference($"quickstartblobs{Guid.NewGuid().ToString()}");
                 await cloudBlobContainer.CreateAsync();
-                WriteLine("Created container '{0}'", cloudBlobContainer.Name);
+                WriteLine($"Created container '{cloudBlobContainer.Name}'");
                 WriteLine();
 
                 // Set the permissions so the blobs are public. 
@@ -92,13 +93,13 @@ namespace storage_blobs_dotnet_quickstart
 
                 // Create a file in your local MyDocuments folder to upload to a blob.
                 string localPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string localFileName = "QuickStart_" + Guid.NewGuid().ToString() + ".txt";
+                string localFileName = $"QuickStart_{Guid.NewGuid().ToString()}.txt";
                 sourceFile = Path.Combine(localPath, localFileName);
                 // Write text to the file.
                 File.WriteAllText(sourceFile, "Hello, World!");
 
-                WriteLine("Temp file = {0}", sourceFile);
-                WriteLine("Uploading to Blob storage as blob '{0}'", localFileName);
+                WriteLine($"Temp file = {sourceFile}");
+                WriteLine($"Uploading to Blob storage as blob '{localFileName}'");
                 WriteLine();
 
                 // Get a reference to the blob address, then upload the file to the blob.
@@ -124,17 +125,17 @@ namespace storage_blobs_dotnet_quickstart
                 // Download the blob to a local file, using the reference created earlier. 
                 // Append the string "_DOWNLOADED" before the .txt extension so that you can see both files in MyDocuments.
                 destinationFile = sourceFile.Replace(".txt", "_DOWNLOADED.txt");
-                WriteLine("Downloading blob to {0}", destinationFile);
+                WriteLine($"Downloading blob to {destinationFile}");
                 WriteLine();
                 await cloudBlockBlob.DownloadToFileAsync(destinationFile, FileMode.Create);
             }
             catch (StorageException ex)
             {
-                WriteLine("Error returned from the service: {0}", ex.Message);
+                WriteLine($"Error returned from the service: {ex.Message}");
             }
             finally
             {
-                WriteLine("Press any key to delete the sample files and example container.");
+                WriteLine("Press enter to delete the sample files and example container.");
                 Console.ReadLine();
                 // Clean up resources. This includes the container and the two temp files.
                 WriteLine("Deleting the container and any blobs it contains");
