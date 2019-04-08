@@ -66,7 +66,7 @@ namespace storage_blobs_dotnet_quickstart
             // in an environment variable on the machine running the application called storageconnectionstring.
             // If the environment variable is created after the application is launched in a console or with Visual
             // Studio, the shell needs to be closed and reloaded to take the environment variable into account.
-            string storageConnectionString = Environment.GetEnvironmentVariable("storageconnectionstring");
+            string storageConnectionString = "UseDevelopmentStorage=true";
 
             // Check whether the connection string can be parsed.
             if (CloudStorageAccount.TryParse(storageConnectionString, out storageAccount))
@@ -78,7 +78,7 @@ namespace storage_blobs_dotnet_quickstart
 
                     // Create a container called 'quickstartblobs' and append a GUID value to it to make the name unique. 
                     cloudBlobContainer = cloudBlobClient.GetContainerReference("quickstartblobs" + Guid.NewGuid().ToString());
-                    await cloudBlobContainer.CreateAsync();
+                    //await cloudBlobContainer.CreateAsync();
                     Console.WriteLine("Created container '{0}'", cloudBlobContainer.Name);
                     Console.WriteLine();
 
@@ -87,7 +87,7 @@ namespace storage_blobs_dotnet_quickstart
                     {
                         PublicAccess = BlobContainerPublicAccessType.Blob
                     };
-                    await cloudBlobContainer.SetPermissionsAsync(permissions);
+                    //await cloudBlobContainer.SetPermissionsAsync(permissions);
 
                     // Create a file in your local MyDocuments folder to upload to a blob.
                     string localPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
