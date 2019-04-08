@@ -110,10 +110,10 @@ namespace storage_blobs_dotnet_quickstart
                     BlobContinuationToken blobContinuationToken = null;
                     do
                     {
-                        var results = await cloudBlobContainer.ListBlobsSegmentedAsync(null, blobContinuationToken);
+                        var resultSegment = await cloudBlobContainer.ListBlobsSegmentedAsync(null, blobContinuationToken);
                         // Get the value of the continuation token returned by the listing call.
-                        blobContinuationToken = results.ContinuationToken;
-                        foreach (IListBlobItem item in results.Results)
+                        blobContinuationToken = resultSegment.ContinuationToken;
+                        foreach (IListBlobItem item in resultSegment.Results)
                         {
                             Console.WriteLine(item.Uri);
                         }
