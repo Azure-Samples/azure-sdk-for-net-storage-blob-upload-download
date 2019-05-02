@@ -47,7 +47,7 @@ namespace storage_blobs_dotnet_quickstart
     {
         public static void Main()
         {
-            Console.WriteLine("Azure Blob storage - .NET Quickstart sample");
+            Console.WriteLine("Azure Blob Storage - .NET quickstart sample");
             Console.WriteLine();
             ProcessAsync().GetAwaiter().GetResult();
 
