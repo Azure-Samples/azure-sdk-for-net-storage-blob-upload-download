@@ -66,7 +66,7 @@ At this point, you can run this application. It creates its own file to upload a
 
 ## Run the application
 
-Navigate to your application directory and run the application with the `dotnet run` command.
+Navigate to your directory where the project file (.csproj) resides and run the application with the `dotnet run` command.
 
 ```console
 dotnet run
