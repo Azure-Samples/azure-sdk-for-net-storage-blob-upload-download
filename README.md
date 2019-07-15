@@ -1,16 +1,12 @@
 ---
-topic: sample
+page_type: sample
 languages:
-  - csharp
+- csharp
 products:
-  - azure
-  - azure-storage
-  - dotnet-core
-name: Transfer objects to and from Azure Blob Storage using .NET
-description: A simple sample project to help you get started using Azure Storage with .NET Core and C# as the development language.
-services: storage
-platforms: dotnet
-author: georgewallace
+- azure
+- azure-storage
+- dotnet-core
+description: "A simple sample project to help you get started using Azure Storage with .NET Core and C# as the development language."
 ---
 
 # Transfer objects to and from Azure Blob Storage using .NET
