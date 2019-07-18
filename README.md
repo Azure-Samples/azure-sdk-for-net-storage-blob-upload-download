@@ -11,7 +11,7 @@ description: "A simple sample project to help you get started using Azure Storag
 
 # Transfer objects to and from Azure Blob Storage using .NET
 
-This repository contains a simple sample project to help you get started using Azure Storage with .NET Core and C# as the development language.
+This repository contains a sample project to help you get started using Azure Storage with .NET Core and C# as the development language.
 
 ## Prerequisites
 
