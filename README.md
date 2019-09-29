@@ -13,7 +13,7 @@ description: "A simple sample project to help you get started using Azure Storag
 There have two sample floders are referred to different version of Azure storage blob SDK.
 * storage-blobs-dotnet-quickstart-v3 using following packages:
     - ["Microsoft.Azure.Storage.Blob"](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/)
-* storage-blobs-dotnet-quickstart-v4 using following packages:
+* storage-blobs-dotnet-quickstart-v12 using following packages:
     - ["Azure.Storage.Blobs"](https://www.nuget.org/packages/Azure.Storage.Blobs/)
     
 ## More information
