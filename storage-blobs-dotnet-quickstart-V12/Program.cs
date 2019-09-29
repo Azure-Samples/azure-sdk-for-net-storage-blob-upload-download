@@ -47,13 +47,13 @@ namespace storage_blobs_dotnet_quickstart
         {
             Console.WriteLine("Azure Blob Storage - .NET quickstart sample");
             Console.WriteLine();
-            await BlobQuickStartDemonstrateAsync();
+            await OperateBlobAsync();
 
             Console.WriteLine("Press any key to exit the sample application.");
             Console.ReadLine();
         }
 
-        private static async Task BlobQuickStartDemonstrateAsync()
+        private static async Task OperateBlobAsync()
         {
             string tempDirectory = null;
             string destinationPath = null;
@@ -69,7 +69,7 @@ namespace storage_blobs_dotnet_quickstart
             if (storageConnectionString == null)
             {
                 Console.WriteLine("A connection string has not been defined in the system environment variables. " +
-                    "Add a environment variable named 'storageconnectionstring' with your storage " +
+                    "Add a environment variable named 'AZURE_STORAGE_CONNECTIONSTRING' with your storage " +
                     "connection string as a value.");
 
                 return;
@@ -106,9 +106,9 @@ namespace storage_blobs_dotnet_quickstart
                 BlobClient blob = blobContainerClient.GetBlobClient(blobName);
              
                 // Open this file and upload it to blob
-                using (FileStream file = File.OpenRead(sourcePath))
+                using (FileStream fileStream = File.OpenRead(sourcePath))
                 {
-                    await blob.UploadAsync(file);
+                    await blob.UploadAsync(fileStream);
                 }
 
                 Console.WriteLine("Uploaded successfully!");
