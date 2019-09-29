@@ -132,9 +132,9 @@ namespace storage_blobs_dotnet_quickstart
                 Console.WriteLine("Downloading blob to file in the temp directory {0}", destinationPath);
                 BlobDownloadInfo blobDownload = await blob.DownloadAsync();
 
-                using (FileStream file = File.OpenWrite(destinationPath))
+                using (FileStream fileStream = File.OpenWrite(destinationPath))
                 {
-                    await blobDownload.Content.CopyToAsync(file);
+                    await blobDownload.Content.CopyToAsync(fileStream);
                 }
 
                 Console.WriteLine("Downloaded successfully!");
