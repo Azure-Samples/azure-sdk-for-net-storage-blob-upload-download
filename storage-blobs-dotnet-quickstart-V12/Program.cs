@@ -128,13 +128,13 @@ namespace storage_blobs_dotnet_quickstart
                 // Append the string "_DOWNLOADED" before the .txt extension so that you can see both files in the temp directory.
                 destinationPath = sourcePath.Replace(".txt", "_DOWNLOADED.txt");
 
-                // Download the blob to fileStream, using the reference created earlier. 
+                // Download the blob to a file in same directory, using the reference created earlier. 
                 Console.WriteLine("Downloading blob to file in the temp directory {0}", destinationPath);
                 BlobDownloadInfo blobDownload = await blob.DownloadAsync();
 
-                using (FileStream fileStream = File.OpenWrite(destinationPath))
+                using (FileStream file = File.OpenWrite(destinationPath))
                 {
-                    await blobDownload.Content.CopyToAsync(fileStream);
+                    await blobDownload.Content.CopyToAsync(file);
                 }
 
                 Console.WriteLine("Downloaded successfully!");
