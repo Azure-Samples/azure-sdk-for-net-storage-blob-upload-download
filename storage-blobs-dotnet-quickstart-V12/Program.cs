@@ -55,7 +55,6 @@ namespace storage_blobs_dotnet_quickstart
 
         private static async Task BlobQuickStartDemonstrateAsync()
         {
-            string containerName = null;
             string tempDirectory = null;
             string destinationPath = null;
             string sourcePath = null;
@@ -79,7 +78,7 @@ namespace storage_blobs_dotnet_quickstart
             try
             {
                 // Create a container called 'quickstartblobs' and append a GUID value to it to make the name unique. 
-                containerName = "quickstartblobs" + Guid.NewGuid().ToString();
+                string containerName = "quickstartblobs" + Guid.NewGuid().ToString();
                 blobContainerClient = new BlobContainerClient(storageConnectionString, containerName);
                 await blobContainerClient.CreateAsync();
                 Console.WriteLine("Created container '{0}'", blobContainerClient.Uri);
@@ -87,7 +86,7 @@ namespace storage_blobs_dotnet_quickstart
 
                 // Set the permissions so the blobs are public. 
                 await blobContainerClient.SetAccessPolicyAsync(PublicAccessType.Blob);
-                Console.WriteLine("Set the Blob access policy as public!");
+                Console.WriteLine("Set the Blob access policy to public!");
                 Console.WriteLine();
 
                 // Create a file in a temp directory folder to upload to a blob.
@@ -103,7 +102,8 @@ namespace storage_blobs_dotnet_quickstart
 
                 // Get a reference to the blob named "sample-blob", then upload the file to the blob.
                 Console.WriteLine("Uploading file to Blob storage as blob '{0}'", blobFileName);
-                BlobClient blob = blobContainerClient.GetBlobClient("sample-blob");
+                string blobName = "sample-blob";
+                BlobClient blob = blobContainerClient.GetBlobClient(blobName);
              
                 // Open this file and upload it to blob
                 using (FileStream file = File.OpenRead(sourcePath))
