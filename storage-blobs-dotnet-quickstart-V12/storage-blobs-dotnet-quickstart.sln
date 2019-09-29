@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "storage-blobs-dotnet-quickstart", "storage-blobs-dotnet-quickstart.csproj", "{A9714B61-40B6-4FCA-B0AD-F57C7A0BFF7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9714B61-40B6-4FCA-B0AD-F57C7A0BFF7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9714B61-40B6-4FCA-B0AD-F57C7A0BFF7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9714B61-40B6-4FCA-B0AD-F57C7A0BFF7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9714B61-40B6-4FCA-B0AD-F57C7A0BFF7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1529A5D0-B8F8-4C4B-B958-4FACC06141A0}
+	EndGlobalSection
+EndGlobal
