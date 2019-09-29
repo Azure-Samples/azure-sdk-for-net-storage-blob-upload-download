@@ -23,7 +23,7 @@ If you don't have an Azure subscription, create a [free account](https://azure.m
 
 ## Create a storage account using the Azure portal
 
-First, create a new general-purpose storage account to use for this quickstart.
+First, create a new general-purpose [storage account](https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal) to use for this quickstart.
 
 1. Go to the [Azure portal](https://portal.azure.com) and log in using your Azure account.
 2. On the Hub menu, select **New** > **Storage** > **Storage account - blob, file, table, queue**.
