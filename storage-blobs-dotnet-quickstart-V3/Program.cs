@@ -22,7 +22,6 @@
 //SOFTWARE.
 //------------------------------------------------------------------------------
 
-
 namespace storage_blobs_dotnet_quickstart
 {
     using Microsoft.Azure.Storage;
@@ -63,10 +62,10 @@ namespace storage_blobs_dotnet_quickstart
             string destinationFile = null;
 
             // Retrieve the connection string for use with the application. The storage connection string is stored
-            // in an environment variable on the machine running the application called storageconnectionstring.
+            // in an environment variable on the machine running the application called AZURE_STORAGE_CONNECTIONSTRING.
             // If the environment variable is created after the application is launched in a console or with Visual
             // Studio, the shell needs to be closed and reloaded to take the environment variable into account.
-            string storageConnectionString = Environment.GetEnvironmentVariable("storageconnectionstring");
+            string storageConnectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTIONSTRING");
 
             // Check whether the connection string can be parsed.
             if (CloudStorageAccount.TryParse(storageConnectionString, out storageAccount))
