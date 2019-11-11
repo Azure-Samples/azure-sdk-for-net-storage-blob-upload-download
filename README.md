@@ -80,7 +80,11 @@ dotnet run
 - Delete the container.
 
 ## Azure SDK Versions
-You will find the following folders: storage-blobs-dotnet-quickstart-v3, which references the [Microsoft.Azure.Storage.Blob](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/) SDK and storage-blobs-dotnet-v12, which uses the [Azure.Storage.Blobs](https://www.nuget.org/packages/Azure.Storage.Blobs/) version of the SDK.
+To use the latest Azure SDK Version [storage-blobs-dotnet-quickstart-v3], please add following dependency :
+- [Microsoft.Azure.Storage.Blob](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/) 
+
+For the previous stable Azure SDK version [storage-blobs-dotnet-quickstart-v12], please add following dependency :
+- [Azure.Storage.Blobs](https://www.nuget.org/packages/Azure.Storage.Blobs/)
 
 ## More information
 
