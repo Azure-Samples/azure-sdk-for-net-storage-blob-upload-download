@@ -95,7 +95,7 @@ namespace Storage.Blob.Dotnet.Quickstart
                 sourcePath = Path.Combine(tempDirectory, blobFileName);
 
                 // Write text to this file.
-                File.WriteAllText(sourcePath, "Storage Blob Quick start!");
+                File.WriteAllText(sourcePath, "Storage Blob Quickstart.");
                 Console.WriteLine("Created Temp file = {0}.", sourcePath);
                 Console.WriteLine();
 
