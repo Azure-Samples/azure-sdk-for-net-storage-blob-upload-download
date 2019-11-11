@@ -83,9 +83,9 @@ namespace Storage.Blob.Dotnet.Quickstart
                 Console.WriteLine("Created container '{0}'.", blobContainerClient.Uri);
                 Console.WriteLine();
 
-                // Setting the permissions so the blobs are public. 
+                // Set the permissions so the blobs are public. 
                 await blobContainerClient.SetAccessPolicyAsync(PublicAccessType.Blob);
-                Console.WriteLine("Set the Blob access policy to public.");
+                Console.WriteLine("Setting the Blob access policy to public.");
                 Console.WriteLine();
 
                 // Create a file in a temp directory folder to upload to a blob.
