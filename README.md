@@ -17,9 +17,9 @@ To complete this tutorial:
 
 If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
 
-## Create a storage Account using the Azure Portal
+## Create a Storage Account using the Azure Portal
 
-Step 1 : Create a new general-purpose storage account to use for this tutorial. 
+Step 1 : Create a new general-purpose storage Account to use for this tutorial. 
  
 *  Go to the [Azure Portal](https://portal.azure.com) and log in using your Azure account. 
 *  Select **New** > **Storage** > **Storage account**. 
@@ -71,7 +71,7 @@ dotnet run
 ```
 
 ## This Quickstart shows how to do some basic operations of Storage Blobs.
-- Create a Storage Account using the Azure portal.
+- Create a Storage Account using the Azure Portal.
 - Create a container.
 - Upload a file to block blob.
 - List blobs.
@@ -79,7 +79,7 @@ dotnet run
 - Delete a blob.
 - Delete the container.
 
-## Folders introduction
+## Azure SDK Versions
 You will find the following folders: storage-blobs-dotnet-quickstart-v3, which references the [Microsoft.Azure.Storage.Blob](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/) SDK and storage-blobs-dotnet-v12, which uses the [Azure.Storage.Blobs](https://www.nuget.org/packages/Azure.Storage.Blobs/) version of the SDK.
 
 ## More information
