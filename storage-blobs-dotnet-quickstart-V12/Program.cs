@@ -22,15 +22,14 @@
 //SOFTWARE.
 //------------------------------------------------------------------------------
 
-
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Azure.Storage;
+using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 
-namespace storage_blobs_dotnet_quickstart
+namespace Storage.Blob.Dotnet.Quickstart
 {
     /// <summary>
     /// Azure Storage Quickstart Sample - Demonstrate how to upload, list, download, and delete blobs. 
@@ -61,7 +60,7 @@ namespace storage_blobs_dotnet_quickstart
             BlobContainerClient blobContainerClient = null;
 
             // Retrieve the connection string for use with the application. The storage connection string is stored
-            // in an environment variable on the machine running the application called storageconnectionstring.
+            // in an environment variable on the machine running the application called AZURE_STORAGE_CONNECTIONSTRING.
             // If the environment variable is created after the application is launched in a console or with Visual
             // Studio, the shell needs to be closed and reloaded to take the environment variable into account.
             string storageConnectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTIONSTRING");
@@ -81,27 +80,27 @@ namespace storage_blobs_dotnet_quickstart
                 string containerName = "quickstartblobs" + Guid.NewGuid().ToString();
                 blobContainerClient = new BlobContainerClient(storageConnectionString, containerName);
                 await blobContainerClient.CreateAsync();
-                Console.WriteLine("Created container '{0}'", blobContainerClient.Uri);
+                Console.WriteLine("Created container '{0}'.", blobContainerClient.Uri);
                 Console.WriteLine();
 
-                // Set the permissions so the blobs are public. 
+                // Setting the permissions so the blobs are public. 
                 await blobContainerClient.SetAccessPolicyAsync(PublicAccessType.Blob);
-                Console.WriteLine("Set the Blob access policy to public!");
+                Console.WriteLine("Set the Blob access policy to public.");
                 Console.WriteLine();
 
                 // Create a file in a temp directory folder to upload to a blob.
                 tempDirectory = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                 Directory.CreateDirectory(tempDirectory);
-                string blobFileName = "QuickStart_" + Path.GetRandomFileName() + ".txt";
+                string blobFileName = "QuickStart" + Path.GetRandomFileName() + ".txt";
                 sourcePath = Path.Combine(tempDirectory, blobFileName);
 
                 // Write text to this file.
-                File.WriteAllText(sourcePath, "Storage Blob qucik start !");
-                Console.WriteLine("Created Temp file = {0}", sourcePath);
+                File.WriteAllText(sourcePath, "Storage Blob Quick start!");
+                Console.WriteLine("Created Temp file = {0}.", sourcePath);
                 Console.WriteLine();
 
                 // Get a reference to the blob named "sample-blob", then upload the file to the blob.
-                Console.WriteLine("Uploading file to Blob storage as blob '{0}'", blobFileName);
+                Console.WriteLine("Uploading file to Blob storage as blob '{0}'.", blobFileName);
                 string blobName = "sample-blob";
                 BlobClient blob = blobContainerClient.GetBlobClient(blobName);
              
@@ -111,25 +110,25 @@ namespace storage_blobs_dotnet_quickstart
                     await blob.UploadAsync(fileStream);
                 }
 
-                Console.WriteLine("Uploaded successfully!");
+                Console.WriteLine("Uploaded successfully.");
                 Console.WriteLine();
 
                 // List the blobs in the container.
-                Console.WriteLine("Listing blobs in container");
+                Console.WriteLine("Listing blobs in container.");
 
                 await foreach (BlobItem item in blobContainerClient.GetBlobsAsync())
                 {
-                    Console.WriteLine("The listed Blob name is '{0}'",item.Name);
+                    Console.WriteLine("The blob name is '{0}'.",item.Name);
                 }
 
-                Console.WriteLine("Listed successfully!");
+                Console.WriteLine("Listed successfully.");
                 Console.WriteLine();
 
                 // Append the string "_DOWNLOADED" before the .txt extension so that you can see both files in the temp directory.
                 destinationPath = sourcePath.Replace(".txt", "_DOWNLOADED.txt");
 
                 // Download the blob to a file in same directory, using the reference created earlier. 
-                Console.WriteLine("Downloading blob to file in the temp directory {0}", destinationPath);
+                Console.WriteLine("Downloading blob to file in the temp directory {0}.", destinationPath);
                 BlobDownloadInfo blobDownload = await blob.DownloadAsync();
 
                 using (FileStream fileStream = File.OpenWrite(destinationPath))
@@ -137,12 +136,12 @@ namespace storage_blobs_dotnet_quickstart
                     await blobDownload.Content.CopyToAsync(fileStream);
                 }
 
-                Console.WriteLine("Downloaded successfully!");
+                Console.WriteLine("Downloaded successfully.");
                 Console.WriteLine();
             }
-            catch (StorageRequestFailedException e)
+            catch (RequestFailedException ex)
             {
-                Console.WriteLine("Error returned from the service: {0}", e.Message);
+                Console.WriteLine("Error returned from the service: {0}.", ex.Message);
             }
             finally
             {
@@ -150,13 +149,13 @@ namespace storage_blobs_dotnet_quickstart
                 Console.ReadLine();
 
                 // Clean up resources. This includes the container and the two temp files.
-                Console.WriteLine("Deleting the container and any blobs it contains");
+                Console.WriteLine("Deleting the container and any blobs it contains.");
                 if (blobContainerClient != null)
                 {
                     await blobContainerClient.DeleteAsync();
                 }
 
-                Console.WriteLine("Deleting the local source file and local downloaded files");
+                Console.WriteLine("Deleting the local source file and local downloaded files.");
                 Console.WriteLine();
                 File.Delete(sourcePath);
                 File.Delete(destinationPath);
