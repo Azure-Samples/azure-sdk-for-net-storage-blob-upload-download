@@ -36,7 +36,7 @@ Step 1 : Create a new general-purpose storage Account to use for this tutorial.
 Step 2 : Copy and save Connection string.
 
 After your Storage Account is created. Click on it to open it. 
-Select **Settings** > **Access keys** > **Primary Key**, copy the associated **Connection string** to the clipboard, then paste it into a text editor for later use.
+Select **Settings** > **Access keys** > **Key1/key**, copy the associated **Connection string** to the clipboard, then paste it into a text editor for later use.
 
 ## Put the connection string in an environment variable
 
