@@ -22,7 +22,7 @@
 //SOFTWARE.
 //------------------------------------------------------------------------------
 
-namespace storage_blobs_dotnet_quickstart
+namespace Storage.Blobs.Dotnet.Quickstart3.V3
 {
     using Microsoft.Azure.Storage;
     using Microsoft.Azure.Storage.Blob;
@@ -78,7 +78,7 @@ namespace storage_blobs_dotnet_quickstart
                     // Create a container called 'quickstartblobs' and append a GUID value to it to make the name unique. 
                     cloudBlobContainer = cloudBlobClient.GetContainerReference("quickstartblobs" + Guid.NewGuid().ToString());
                     await cloudBlobContainer.CreateAsync();
-                    Console.WriteLine("Created container '{0}'", cloudBlobContainer.Name);
+                    Console.WriteLine("Created container '{0}'.", cloudBlobContainer.Name);
                     Console.WriteLine();
 
                     // Set the permissions so the blobs are public. 
@@ -86,17 +86,19 @@ namespace storage_blobs_dotnet_quickstart
                     {
                         PublicAccess = BlobContainerPublicAccessType.Blob
                     };
+
                     await cloudBlobContainer.SetPermissionsAsync(permissions);
 
                     // Create a file in your local MyDocuments folder to upload to a blob.
                     string localPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    string localFileName = "QuickStart_" + Guid.NewGuid().ToString() + ".txt";
+                    string localFileName = "QuickStart" + Guid.NewGuid().ToString() + ".txt";
                     sourceFile = Path.Combine(localPath, localFileName);
+
                     // Write text to the file.
                     File.WriteAllText(sourceFile, "Hello, World!");
 
                     Console.WriteLine("Temp file = {0}", sourceFile);
-                    Console.WriteLine("Uploading to Blob storage as blob '{0}'", localFileName);
+                    Console.WriteLine("Uploading to Blob storage as blob '{0}'.", localFileName);
                     Console.WriteLine();
 
                     // Get a reference to the blob address, then upload the file to the blob.
@@ -107,28 +109,32 @@ namespace storage_blobs_dotnet_quickstart
                     // List the blobs in the container.
                     Console.WriteLine("Listing blobs in container.");
                     BlobContinuationToken blobContinuationToken = null;
+
                     do
                     {
                         var resultSegment = await cloudBlobContainer.ListBlobsSegmentedAsync(null, blobContinuationToken);
+
                         // Get the value of the continuation token returned by the listing call.
                         blobContinuationToken = resultSegment.ContinuationToken;
                         foreach (IListBlobItem item in resultSegment.Results)
                         {
                             Console.WriteLine(item.Uri);
                         }
-                    } while (blobContinuationToken != null); // Loop while the continuation token is not null.
+                    } 
+
+                    while (blobContinuationToken != null); // Loop while the continuation token is not null.
                     Console.WriteLine();
 
                     // Download the blob to a local file, using the reference created earlier. 
                     // Append the string "_DOWNLOADED" before the .txt extension so that you can see both files in MyDocuments.
                     destinationFile = sourceFile.Replace(".txt", "_DOWNLOADED.txt");
-                    Console.WriteLine("Downloading blob to {0}", destinationFile);
+                    Console.WriteLine("Downloading blob to {0}.", destinationFile);
                     Console.WriteLine();
                     await cloudBlockBlob.DownloadToFileAsync(destinationFile, FileMode.Create);
                 }
                 catch (StorageException ex)
                 {
-                    Console.WriteLine("Error returned from the service: {0}", ex.Message);
+                    Console.WriteLine("Error returned from the service: {0}.", ex.Message);
                 }
                 finally
                 {
