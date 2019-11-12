@@ -35,7 +35,8 @@ Step 1 : Create a new general-purpose storage Account to use for this tutorial.
  
 Step 2 : Copy and save Connection string.
 
-After your Storage Account is created, it is pinned to the dashboard. Click on it to open it. Under **Settings**, click **Access keys**. Select the primary key and copy the associated **Connection string** to the clipboard, then paste it into a text editor for later use.
+After your Storage Account is created. Click on it to open it. 
+Select **Settings** > **Access keys** > **Primary Key**, copy the associated **Connection string** to the clipboard, then paste it into a text editor for later use.
 
 ## Put the connection string in an environment variable
 
@@ -79,12 +80,8 @@ dotnet run
 - Delete a blob.
 - Delete the container.
 
-## Azure SDK Versions
-To use the latest Azure SDK Version [storage-blobs-dotnet-quickstart-v3], please add following dependency :
-- [Microsoft.Azure.Storage.Blob](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/) 
-
-For the previous stable Azure SDK version [storage-blobs-dotnet-quickstart-v12], please add following dependency :
-- [Azure.Storage.Blobs](https://www.nuget.org/packages/Azure.Storage.Blobs/)
+## Folders Introduction
+You will find the following folders: storage-blobs-dotnet-quickstart-v3, which references the [Microsoft.Azure.Storage.Blob](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/) SDK and storage-blobs-dotnet-quickstart-v12, which uses the [Azure.Storage.Blobs](https://www.nuget.org/packages/Azure.Storage.Blobs/) version of the SDK.
 
 ## More information
 
