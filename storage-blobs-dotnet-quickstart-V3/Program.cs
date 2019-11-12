@@ -22,7 +22,7 @@
 //SOFTWARE.
 //------------------------------------------------------------------------------
 
-namespace Storage.Blobs.Dotnet.Quickstart3.V3
+namespace Storage.Blobs.Dotnet.Quickstart.V3
 {
     using Microsoft.Azure.Storage;
     using Microsoft.Azure.Storage.Blob;
@@ -48,13 +48,13 @@ namespace Storage.Blobs.Dotnet.Quickstart3.V3
         {
             Console.WriteLine("Azure Blob Storage - .NET quickstart sample");
             Console.WriteLine();
-            ProcessAsync().GetAwaiter().GetResult();
+            OperateBlobAsync().GetAwaiter().GetResult();
 
             Console.WriteLine("Press any key to exit the sample application.");
             Console.ReadLine();
         }
 
-        private static async Task ProcessAsync()
+        private static async Task OperateBlobAsync()
         {
             CloudStorageAccount storageAccount = null;
             CloudBlobContainer cloudBlobContainer = null;

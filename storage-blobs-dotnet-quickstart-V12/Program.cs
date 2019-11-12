@@ -29,7 +29,7 @@ using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 
-namespace Storage.Blob.Dotnet.Quickstart
+namespace Storage.Blob.Dotnet.Quickstart.V12
 {
     /// <summary>
     /// Azure Storage Quickstart Sample - Demonstrate how to upload, list, download, and delete blobs. 
