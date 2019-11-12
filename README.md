@@ -25,7 +25,7 @@ Step 1 : Create a new general-purpose storage Account to use for this tutorial.
 *  Select **New** > **Storage** > **Storage account**. 
 *  Select your Subscription. 
 *  For `Resource group`, create a new one and give it a unique name. 
-*  Enter a name for your storage account. The name must be between 3 and 24 characters in length and may contain numbers and lowercase letters only. It must also be unique.
+*  Enter a name for your storage Account. The name must be between 3 and 24 characters in length and may contain numbers and lowercase letters only. It must also be unique.
 *  Select the `Location` to use for your Storage Account.
 *  Set `Account kind` to **StorageV2(general purpose v2)**.
 *  Set `Performance` to **Standard**. 
