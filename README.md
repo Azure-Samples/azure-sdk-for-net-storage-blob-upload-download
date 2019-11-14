@@ -9,6 +9,14 @@ products:
 description: "A simple sample project to help you get started using Azure Storage with .NET Core and C# as the development language."
 ---
 
+## Azure SDK Versions
+To use the latest Azure SDK version [storage-blobs-dotnet-quickstart-v3](./storage-blobs-dotnet-quickstart-V3), please add the following dependency:
+- [Microsoft.Azure.Storage.Blob](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/) 
+
+For the previous Azure SDK version [storage-blobs-dotnet-quickstart-v12](./storage-blobs-dotnet-quickstart-V12), please add the following dependency: 
+- [Azure.Storage.Blobs](https://www.nuget.org/packages/Azure.Storage.Blobs/)
+
+
 ## Prerequisites
 
 To complete this tutorial:
@@ -79,13 +87,6 @@ dotnet run
 - Download a blob to file.
 - Delete a blob.
 - Delete the container.
-
-## Azure SDK Versions
-To use the latest Azure SDK version [storage-blobs-dotnet-quickstart-v3](./storage-blobs-dotnet-quickstart-V3), please add the following dependency:
-- [Microsoft.Azure.Storage.Blob](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/) 
-
-For the previous Azure SDK version [storage-blobs-dotnet-quickstart-v12](./storage-blobs-dotnet-quickstart-V12), please add the following dependency: 
-- [Azure.Storage.Blobs](https://www.nuget.org/packages/Azure.Storage.Blobs/)
 
 ## More information
 
