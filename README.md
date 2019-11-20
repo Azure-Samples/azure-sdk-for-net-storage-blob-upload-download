@@ -53,13 +53,13 @@ This solution requires a connection string be stored in an environment variable 
 ### Linux
 
 ```bash
-export AZURE_STORAGE_CONNECTIONSTRING="<yourconnectionstring>"
+export AZURE_STORAGE_CONNECTIONSTRING="<YourConnectionString>"
 ```
 
 ### Windows
 
 ```cmd
-setx AZURE_STORAGE_CONNECTIONSTRING "<yourconnectionstring>"
+setx AZURE_STORAGE_CONNECTIONSTRING "<YourConnectionString>"
 ```
 
 At this point, you can run this application. It creates its own file to upload and download, and then cleans up after itself by deleting everything at the end.
