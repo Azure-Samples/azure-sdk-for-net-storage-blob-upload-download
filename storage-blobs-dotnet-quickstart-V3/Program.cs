@@ -22,14 +22,14 @@
 //SOFTWARE.
 //------------------------------------------------------------------------------
 
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using Microsoft.Azure.Storage;
+using Microsoft.Azure.Storage.Blob;
+
 namespace Storage.Blobs.Dotnet.Quickstart.V3
 {
-    using Microsoft.Azure.Storage;
-    using Microsoft.Azure.Storage.Blob;
-    using System;
-    using System.IO;
-    using System.Threading.Tasks;
-
     /// <summary>
     /// Azure Storage Quickstart Sample - Demonstrate how to upload, list, download, and delete blobs. 
     ///
@@ -39,7 +39,7 @@ namespace Storage.Blobs.Dotnet.Quickstart.V3
     /// 
     /// Documentation References: 
     /// - Azure Storage client library for .NET - https://docs.microsoft.com/dotnet/api/overview/azure/storage?view=azure-dotnet
-    /// - Asynchronous Programming with Async and Await - http://msdn.microsoft.com/library/hh191443.aspx
+    /// - Asynchronous Programming with Async and Await - https://docs.microsoft.com/en-us/dotnet/csharp/async
     /// </summary>
 
     public static class Program
@@ -56,7 +56,6 @@ namespace Storage.Blobs.Dotnet.Quickstart.V3
 
         private static async Task OperateBlobAsync()
         {
-            CloudStorageAccount storageAccount = null;
             CloudBlobContainer cloudBlobContainer = null;
             string sourceFile = null;
             string destinationFile = null;
@@ -68,7 +67,7 @@ namespace Storage.Blobs.Dotnet.Quickstart.V3
             string storageConnectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTIONSTRING");
 
             // Check whether the connection string can be parsed.
-            if (CloudStorageAccount.TryParse(storageConnectionString, out storageAccount))
+            if (CloudStorageAccount.TryParse(storageConnectionString, out CloudStorageAccount storageAccount))
             {
                 try
                 {
@@ -130,6 +129,7 @@ namespace Storage.Blobs.Dotnet.Quickstart.V3
                     destinationFile = sourceFile.Replace(".txt", "_DOWNLOADED.txt");
                     Console.WriteLine("Downloading blob to {0}.", destinationFile);
                     Console.WriteLine();
+
                     await cloudBlockBlob.DownloadToFileAsync(destinationFile, FileMode.Create);
                 }
                 catch (StorageException ex)
@@ -140,12 +140,14 @@ namespace Storage.Blobs.Dotnet.Quickstart.V3
                 {
                     Console.WriteLine("Press any key to delete the sample files and example container.");
                     Console.ReadLine();
+
                     // Clean up resources. This includes the container and the two temp files.
                     Console.WriteLine("Deleting the container and any blobs it contains");
                     if (cloudBlobContainer != null)
                     {
                         await cloudBlobContainer.DeleteIfExistsAsync();
                     }
+
                     Console.WriteLine("Deleting the local source file and local downloaded files");
                     Console.WriteLine();
                     File.Delete(sourceFile);
@@ -156,7 +158,7 @@ namespace Storage.Blobs.Dotnet.Quickstart.V3
             {
                 Console.WriteLine(
                     "A connection string has not been defined in the system environment variables. " +
-                    "Add a environment variable named 'storageconnectionstring' with your storage " +
+                    "Add a environment variable named 'AZURE_STORAGE_CONNECTIONSTRING' with your storage " +
                     "connection string as a value.");
             }
         }

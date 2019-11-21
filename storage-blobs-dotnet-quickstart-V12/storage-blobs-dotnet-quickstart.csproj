@@ -1,1 +1,13 @@
-﻿appsetting -> store the vaule what we needed -> TokenCredentialHelper -> return the credentials to initClient 
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>	
+    <OutputType>Exe</OutputType>	
+    <TargetFramework>netcoreapp2.1</TargetFramework>	
+    <LangVersion>preview</LangVersion>	
+  </PropertyGroup>	
+
+  <ItemGroup>	
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.0.0" />	
+  </ItemGroup>	
+
+</Project>

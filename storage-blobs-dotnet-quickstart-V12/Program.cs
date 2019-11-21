@@ -32,7 +32,7 @@ using Azure.Storage.Blobs.Models;
 namespace Storage.Blob.Dotnet.Quickstart.V12
 {
     /// <summary>
-    /// Azure Storage Quickstart Sample - Demonstrate how to upload, list, download, and delete blobs. 
+    /// Azure Storage QuickStart Sample - Demonstrate how to upload, list, download, and delete blobs. 
     ///
     /// Note: This sample uses the .NET asynchronous programming model to demonstrate how to call Blob storage using the 
     /// azure storage client library's asynchronous API's. When used in production applications, this approach enables you to improve the 
@@ -44,7 +44,7 @@ namespace Storage.Blob.Dotnet.Quickstart.V12
     {
         public static async Task Main()
         {
-            Console.WriteLine("Azure Blob Storage - .NET quickstart sample");
+            Console.WriteLine("Azure Blob Storage - .NET QuickStart sample");
             Console.WriteLine();
             await OperateBlobAsync();
 
