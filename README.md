@@ -6,30 +6,32 @@ products:
 - azure
 - azure-storage
 - dotnet-core
-description: "A simple sample project to help you get started using Azure Storage with .NET Core and C# as the development language."
+description: "How to upload and download blobs from Azure Blob Storage with .NET."
+urlFragment: upload-download-blobs-net
 ---
 
+# How to upload and download blobs from Azure Blob Storage with .NET
+
 ## Azure SDK Versions
-To use the latest Azure SDK version [storage-blobs-dotnet-quickstart-v3](./storage-blobs-dotnet-quickstart-V3), please add the following dependency:
-- [Microsoft.Azure.Storage.Blob](https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/) 
+To use the latest Azure SDK version [azure-sdk-for-net-storage-blob-upload-download-v3], please add the following dependency:
+- [Microsoft.Azure.Storage.Blob]
 
-For the previous Azure SDK version [storage-blobs-dotnet-quickstart-v12](./storage-blobs-dotnet-quickstart-V12), please add the following dependency: 
-- [Azure.Storage.Blobs](https://www.nuget.org/packages/Azure.Storage.Blobs/)
-
+For the previous Azure SDK version [azure-sdk-for-net-storage-blob-upload-download-v12], please add the following dependency: 
+- [Azure.Storage.Blobs]
 
 ## Prerequisites
 
 To complete this tutorial:
 
-* Install .NET core 2.1 for [Linux](https://dotnet.microsoft.com/download/dotnet-core/2.1) or [Windows](https://dotnet.microsoft.com/download/dotnet-core/2.1)
+* Install .NET core 2.1 for [Linux] or [Windows]
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account] before you begin.
 
 ## Create a Storage Account using the Azure Portal
 
-Step 1 : Create a new general-purpose Storage Account to use for this tutorial. 
+Step 1 : Create a new general-purpose Storage Account to use for this tutorial.
  
-*  Go to the [Azure Portal](https://portal.azure.com) and log in using your Azure account. 
+*  Go to the [Azure Portal] and log in using your Azure account. 
 *  Select **New** > **Storage** > **Storage account**. 
 *  Select your Subscription. 
 *  For `Resource group`, create a new one and give it a unique name. 
@@ -79,7 +81,7 @@ Navigate to your directory where the project file (.csproj) resides and run the 
 dotnet run
 ```
 
-## This Quickstart shows how to do following operations of Storage Blobs.
+## This QuickStart shows how to do following operations of Storage Blobs.
 - Create a Storage Account using the Azure Portal.
 - Create a container.
 - Upload a file to block blob.
@@ -90,8 +92,21 @@ dotnet run
 
 ## More information
 
-The [Azure Storage documentation](https://docs.microsoft.com/azure/storage/) includes a rich set of tutorials and conceptual articles, which serve as a good complement to the samples.
+The [Azure Storage documentation] includes a rich set of tutorials and conceptual articles, which serve as a good complement to the samples.
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+This project has adopted the [Microsoft Open Source Code of Conduct].
+For more information see the [Code of Conduct FAQ] or contact [opencode@microsoft.com] with any additional questions or comments.
+
+<!-- LINKS -->
+[azure-sdk-for-net-storage-blob-upload-download-v3]: https://github.com/Azure-Samples/azure-sdk-for-net-storage-blob-upload-download/tree/master/azure-sdk-for-net-storage-blob-upload-download-v3
+[Microsoft.Azure.Storage.Blob]: https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/
+[azure-sdk-for-net-storage-blob-upload-download-v12]: https://github.com/Azure-Samples/azure-sdk-for-net-storage-blob-upload-download/tree/master/azure-sdk-for-net-storage-blob-upload-download-v12
+[Azure.Storage.Blobs]: https://www.nuget.org/packages/Azure.Storage.Blobs/
+[Linux]: https://dotnet.microsoft.com/download/dotnet-core/2.1
+[Windows]: https://dotnet.microsoft.com/download/dotnet-core/2.1
+[free account]: https://azure.microsoft.com/free/?WT.mc_id=A261C142F
+[Azure Portal]: https://portal.azure.com
+[Azure Storage documentation]: https://docs.microsoft.com/azure/storage/
+[Microsoft Open Source Code of Conduct]: https://opensource.microsoft.com/codeofconduct/
+[Code of Conduct FAQ]: https://opensource.microsoft.com/codeofconduct/faq/
+[opencode@microsoft.com]: mailto:opencode@microsoft.com
