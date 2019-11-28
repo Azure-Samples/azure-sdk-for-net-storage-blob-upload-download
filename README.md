@@ -12,12 +12,10 @@ urlFragment: upload-download-blobs-net
 
 # How to upload and download blobs from Azure Blob Storage with .NET
 
-## Azure SDK Versions
-To use the previous Azure SDK version [azure-sdk-for-net-storage-blob-upload-download-v11], please add the following dependency:
-- [Microsoft.Azure.Storage.Blob]
-
-For the latest Azure SDK version [azure-sdk-for-net-storage-blob-upload-download-v12], please add the following dependency: 
-- [Azure.Storage.Blobs]
+## SDK Versions
+In this sample, you will find the following folders:
+* **azure-sdk-for-net-storage-blob-upload-download-v11** - references Storage Blob SDK v11
+* **azure-sdk-for-net-storage-blob-upload-download-v12** - references Storage Blob SDK v12
 
 ## Prerequisites
 
@@ -98,10 +96,6 @@ This project has adopted the [Microsoft Open Source Code of Conduct].
 For more information see the [Code of Conduct FAQ] or contact [opencode@microsoft.com] with any additional questions or comments.
 
 <!-- LINKS -->
-[azure-sdk-for-net-storage-blob-upload-download-v11]: https://github.com/Azure-Samples/azure-sdk-for-net-storage-blob-upload-download/tree/master/azure-sdk-for-net-storage-blob-upload-download-v11
-[Microsoft.Azure.Storage.Blob]: https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/
-[azure-sdk-for-net-storage-blob-upload-download-v12]: https://github.com/Azure-Samples/azure-sdk-for-net-storage-blob-upload-download/tree/master/azure-sdk-for-net-storage-blob-upload-download-v12
-[Azure.Storage.Blobs]: https://www.nuget.org/packages/Azure.Storage.Blobs/
 [Linux]: https://dotnet.microsoft.com/download
 [Windows]: https://dotnet.microsoft.com/download
 [free account]: https://azure.microsoft.com/free/?WT.mc_id=A261C142F
