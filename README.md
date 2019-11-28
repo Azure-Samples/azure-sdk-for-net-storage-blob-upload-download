@@ -27,7 +27,7 @@ To complete this tutorial:
 
 If you don't have an Azure subscription, create a [free account] before you begin.
 
-## Create a Storage Account using the Azure Portal
+### Create a Storage Account using the Azure Portal
 
 Step 1 : Create a new general-purpose Storage Account to use for this tutorial.
  
@@ -48,17 +48,17 @@ Step 2 : Copy and save Connection string.
 After your Storage Account is created. Click on it to open it. 
 Select **Settings** > **Access keys** > **Key1/key**, copy the associated **Connection string** to the clipboard, then paste it into a text editor for later use.
 
-## Put the connection string in an environment variable
+### Put the connection string in an environment variable
 
 This solution requires a connection string be stored in an environment variable securely on the machine running the sample. Follow one of the examples below depending on your operating system to create the environment variable. If using Windows close your open IDE or shell and restart it to be able to read the environment variable.
 
-### Linux
+Linux
 
 ```bash
 export AZURE_STORAGE_CONNECTIONSTRING="<YourConnectionString>"
 ```
 
-### Windows
+Windows
 
 ```cmd
 setx AZURE_STORAGE_CONNECTIONSTRING "<YourConnectionString>"
@@ -81,7 +81,7 @@ Navigate to your directory where the project file (.csproj) resides and run the 
 dotnet run
 ```
 
-## This Sample shows how to do following operations of Storage Blobs.
+## This Sample shows how to do following operations of Storage Blobs
 - Create a Storage Account using the Azure Portal.
 - Create a container.
 - Upload a file to block blob.
