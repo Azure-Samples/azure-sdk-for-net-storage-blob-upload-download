@@ -81,7 +81,7 @@ Navigate to your directory where the project file (.csproj) resides and run the 
 dotnet run
 ```
 
-## This Sample shows how to do following operations of Storage Blobs
+## This sample shows how to do following operations of Storage Blobs
 - Create a Storage Account using the Azure Portal.
 - Create a container.
 - Upload a file to block blob.
