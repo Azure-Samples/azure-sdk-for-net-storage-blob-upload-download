@@ -13,10 +13,10 @@ urlFragment: upload-download-blobs-net
 # How to upload and download blobs from Azure Blob Storage with .NET
 
 ## Azure SDK Versions
-To use the latest Azure SDK version [azure-sdk-for-net-storage-blob-upload-download-v11], please add the following dependency:
+To use the previous Azure SDK version [azure-sdk-for-net-storage-blob-upload-download-v11], please add the following dependency:
 - [Microsoft.Azure.Storage.Blob]
 
-For the previous Azure SDK version [azure-sdk-for-net-storage-blob-upload-download-v12], please add the following dependency: 
+For the latest Azure SDK version [azure-sdk-for-net-storage-blob-upload-download-v12], please add the following dependency: 
 - [Azure.Storage.Blobs]
 
 ## Prerequisites
