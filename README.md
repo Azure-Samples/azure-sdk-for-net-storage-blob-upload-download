@@ -13,7 +13,7 @@ urlFragment: upload-download-blobs-net
 # How to upload and download blobs from Azure Blob Storage with .NET
 
 ## Azure SDK Versions
-To use the latest Azure SDK version [azure-sdk-for-net-storage-blob-upload-download-v3], please add the following dependency:
+To use the latest Azure SDK version [azure-sdk-for-net-storage-blob-upload-download-v11], please add the following dependency:
 - [Microsoft.Azure.Storage.Blob]
 
 For the previous Azure SDK version [azure-sdk-for-net-storage-blob-upload-download-v12], please add the following dependency: 
@@ -23,7 +23,7 @@ For the previous Azure SDK version [azure-sdk-for-net-storage-blob-upload-downlo
 
 To complete this tutorial:
 
-* Install .NET core 2.1 for [Linux] or [Windows]
+* Install .NET Core latest version for [Linux] or [Windows]
 
 If you don't have an Azure subscription, create a [free account] before you begin.
 
@@ -81,7 +81,7 @@ Navigate to your directory where the project file (.csproj) resides and run the 
 dotnet run
 ```
 
-## This QuickStart shows how to do following operations of Storage Blobs.
+## This Sample shows how to do following operations of Storage Blobs.
 - Create a Storage Account using the Azure Portal.
 - Create a container.
 - Upload a file to block blob.
@@ -98,12 +98,12 @@ This project has adopted the [Microsoft Open Source Code of Conduct].
 For more information see the [Code of Conduct FAQ] or contact [opencode@microsoft.com] with any additional questions or comments.
 
 <!-- LINKS -->
-[azure-sdk-for-net-storage-blob-upload-download-v3]: https://github.com/Azure-Samples/azure-sdk-for-net-storage-blob-upload-download/tree/master/azure-sdk-for-net-storage-blob-upload-download-v3
+[azure-sdk-for-net-storage-blob-upload-download-v11]: https://github.com/Azure-Samples/azure-sdk-for-net-storage-blob-upload-download/tree/master/azure-sdk-for-net-storage-blob-upload-download-v11
 [Microsoft.Azure.Storage.Blob]: https://www.nuget.org/packages/Microsoft.Azure.Storage.Blob/
 [azure-sdk-for-net-storage-blob-upload-download-v12]: https://github.com/Azure-Samples/azure-sdk-for-net-storage-blob-upload-download/tree/master/azure-sdk-for-net-storage-blob-upload-download-v12
 [Azure.Storage.Blobs]: https://www.nuget.org/packages/Azure.Storage.Blobs/
-[Linux]: https://dotnet.microsoft.com/download/dotnet-core/2.1
-[Windows]: https://dotnet.microsoft.com/download/dotnet-core/2.1
+[Linux]: https://dotnet.microsoft.com/download
+[Windows]: https://dotnet.microsoft.com/download
 [free account]: https://azure.microsoft.com/free/?WT.mc_id=A261C142F
 [Azure Portal]: https://portal.azure.com
 [Azure Storage documentation]: https://docs.microsoft.com/azure/storage/
