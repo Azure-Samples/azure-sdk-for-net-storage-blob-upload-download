@@ -14,8 +14,8 @@ urlFragment: upload-download-blobs-net
 
 ## SDK Versions
 In this sample, you will find the following folders:
-* **azure-sdk-for-net-storage-blob-upload-download-v11** - references Storage Blob SDK v11
-* **azure-sdk-for-net-storage-blob-upload-download-v12** - references Storage Blob SDK v12
+* **v11** - references Storage Blob SDK v11
+* **v12** - references Storage Blob SDK v12
 
 ## Prerequisites
 
