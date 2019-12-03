@@ -68,10 +68,17 @@ At this point, you can run this application. It creates its own file to upload a
 First, clone the repository on your machine:
 
 ```bash
-git clone https://github.com/Azure-Samples/storage-blobs-dotnet-quickstart.git
+git clone https://github.com/Azure-Samples/azure-sdk-for-net-storage-blob-upload-download.git
 ```
 
 Then, switch to the appropriate folder:
+```bash
+cd v11
+```
+or
+```bash
+cd v12
+```
 
 Navigate to your directory where the project file (.csproj) resides and run the application with the `dotnet run` command.
 
