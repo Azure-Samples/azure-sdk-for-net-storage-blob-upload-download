@@ -80,7 +80,7 @@ or
 cd v12
 ```
 
-Navigate to your directory where the project file (.csproj) resides and run the application with the `dotnet run` command.
+Finally, run the application with the `dotnet run` command.
 
 ```console
 dotnet run
