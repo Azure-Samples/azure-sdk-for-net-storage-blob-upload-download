@@ -37,7 +37,7 @@ namespace Storage.Blob.Dotnet.Quickstart.V12
     /// Note: This sample uses the .NET asynchronous programming model to demonstrate how to call Blob storage using the 
     /// azure storage client library's asynchronous API's. When used in production applications, this approach enables you to improve the 
     /// responsiveness of your application.  
-    /// 
+    ///
     /// </summary>
 
     public static class Program
@@ -48,7 +48,7 @@ namespace Storage.Blob.Dotnet.Quickstart.V12
             Console.WriteLine();
             await OperateBlobAsync();
 
-            Console.WriteLine("Press any key to exit the sample application.");
+            Console.WriteLine("Press enter to exit the sample application.");
             Console.ReadLine();
         }
 
@@ -76,11 +76,11 @@ namespace Storage.Blob.Dotnet.Quickstart.V12
 
             try
             {
-                // Create a container called 'quickstartblobs' and append a GUID value to it to make the name unique. 
-                string containerName = "quickstartblobs" + Guid.NewGuid().ToString();
+                // Create a container called 'quickstartblob' and append a GUID value to it to make the name unique. 
+                string containerName = "quickstartblob" + Guid.NewGuid().ToString();
                 blobContainerClient = new BlobContainerClient(storageConnectionString, containerName);
                 await blobContainerClient.CreateAsync();
-                Console.WriteLine("Created container '{0}'.", blobContainerClient.Uri);
+                Console.WriteLine($"Created container '{blobContainerClient.Uri}'");
                 Console.WriteLine();
 
                 // Set the permissions so the blobs are public. 
@@ -91,19 +91,19 @@ namespace Storage.Blob.Dotnet.Quickstart.V12
                 // Create a file in a temp directory folder to upload to a blob.
                 tempDirectory = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                 Directory.CreateDirectory(tempDirectory);
-                string blobFileName = "QuickStart" + Path.GetRandomFileName() + ".txt";
+                string blobFileName = $"QuickStart_{Path.GetRandomFileName()}.txt";
                 sourcePath = Path.Combine(tempDirectory, blobFileName);
 
                 // Write text to this file.
                 File.WriteAllText(sourcePath, "Storage Blob Quickstart.");
-                Console.WriteLine("Created Temp file = {0}.", sourcePath);
+                Console.WriteLine($"Created Temp file = {sourcePath}");
                 Console.WriteLine();
 
                 // Get a reference to the blob named "sample-blob", then upload the file to the blob.
-                Console.WriteLine("Uploading file to Blob storage as blob '{0}'.", blobFileName);
+                Console.WriteLine($"Uploading file to Blob storage as blob '{blobFileName}'");
                 string blobName = "sample-blob";
                 BlobClient blob = blobContainerClient.GetBlobClient(blobName);
-             
+
                 // Open this file and upload it to blob
                 using (FileStream fileStream = File.OpenRead(sourcePath))
                 {
@@ -115,10 +115,9 @@ namespace Storage.Blob.Dotnet.Quickstart.V12
 
                 // List the blobs in the container.
                 Console.WriteLine("Listing blobs in container.");
-
                 await foreach (BlobItem item in blobContainerClient.GetBlobsAsync())
                 {
-                    Console.WriteLine("The blob name is '{0}'.",item.Name);
+                    Console.WriteLine($"The blob name is '{item.Name}'");
                 }
 
                 Console.WriteLine("Listed successfully.");
@@ -128,7 +127,7 @@ namespace Storage.Blob.Dotnet.Quickstart.V12
                 destinationPath = sourcePath.Replace(".txt", "_DOWNLOADED.txt");
 
                 // Download the blob to a file in same directory, using the reference created earlier. 
-                Console.WriteLine("Downloading blob to file in the temp directory {0}.", destinationPath);
+                Console.WriteLine($"Downloading blob to file in the temp directory {destinationPath}");
                 BlobDownloadInfo blobDownload = await blob.DownloadAsync();
 
                 using (FileStream fileStream = File.OpenWrite(destinationPath))
@@ -141,11 +140,11 @@ namespace Storage.Blob.Dotnet.Quickstart.V12
             }
             catch (RequestFailedException ex)
             {
-                Console.WriteLine("Error returned from the service: {0}.", ex.Message);
+                Console.WriteLine($"Error returned from the service: {ex.Message}");
             }
             finally
             {
-                Console.WriteLine("Press any key to delete the sample files and example container.");
+                Console.WriteLine("Press enter to delete the sample files and example container.");
                 Console.ReadLine();
 
                 // Clean up resources. This includes the container and the two temp files.
@@ -157,11 +156,19 @@ namespace Storage.Blob.Dotnet.Quickstart.V12
 
                 Console.WriteLine("Deleting the local source file and local downloaded files.");
                 Console.WriteLine();
-                File.Delete(sourcePath);
-                File.Delete(destinationPath);
-                Directory.Delete(tempDirectory);
+                if (File.Exists(sourcePath))
+                {
+                    File.Delete(sourcePath);
+                }
+                if (File.Exists(destinationPath))
+                {
+                    File.Delete(destinationPath);
+                }
+                if (Directory.Exists(tempDirectory))
+                {
+                    Directory.Delete(tempDirectory);
+                }
             }
         }
     }
 }
-
