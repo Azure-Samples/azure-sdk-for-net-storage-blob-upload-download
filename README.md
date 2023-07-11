@@ -5,7 +5,7 @@ languages:
 products:
 - azure
 - azure-storage
-- dotnet-core
+- dotnet
 description: "How to upload and download blobs from Azure Blob Storage with .NET."
 urlFragment: upload-download-blobs-net
 ---
